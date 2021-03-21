@@ -1,0 +1,13 @@
+info:
+  app:
+    name: SafetyNet Alerts
+    description: Send Alerts to help people face emergency situations
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - info
+        - health
+        - metrics
+        - httptrace
