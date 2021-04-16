@@ -6,6 +6,8 @@ package com.safetynet.backend.store;
 import java.io.File;
 import java.io.IOException;
 
+import org.springframework.stereotype.Service;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author tonys
  *
  */
+@Service
 public class ManageWithJsonFIle implements IManageDataStore {
 	
 	private static final String PATH_TO_JSON_FILE = "src/main/resources/data.json";
