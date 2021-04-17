@@ -13,13 +13,16 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data @NoArgsConstructor
-public class PersonInfoDto {
+public class PersonWithMedicalRecord {
 
 	private String firstName;
 	private String lastName;
 	private String address;
-	private int age;
+	private String city;
+	private String zip;
+	private String phone;
 	private String email;
+	private String birthdate;
 	private List<String> medications;
 	private List<String> allergies;
 	

@@ -4,6 +4,7 @@
 package com.safetynet.backend.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.safetynet.backend.dto.PersonInfoDto;
+import com.safetynet.backend.entities.Firestation;
+import com.safetynet.backend.entities.MedicalRecord;
 import com.safetynet.backend.entities.Person;
 import com.safetynet.backend.store.DataStore;
 import com.safetynet.backend.store.IManageDataStore;
@@ -39,13 +43,20 @@ class CommonServiceTest {
 	static void initDataStoreForThisClass() {
 		dataStore = new DataStore();
 		final List<Person> personsList = new ArrayList<>();
+		final List<MedicalRecord> medicalRecords = new ArrayList<>();
+		final List<Firestation> fireStations = new ArrayList<>();
 		personsList.add(getPersonWith("Dany", "Simons", "dany@simons.com", "Los Angeles", "237698461375"));
-		dataStore.setPersons(personsList);		
+		medicalRecords.add(getMedicalRecordWith("Dany", "Simons", "17/02/1990"));
+		fireStations.add(new Firestation("1509 Culver St",2));
+		
+		dataStore.setPersons(personsList);
+		dataStore.setMedicalrecords(medicalRecords);
+		dataStore.setFirestations(fireStations);
 	}
 	
 	private static Person getPersonWith(String firstName, String lastName, String email, String city, String phone ) {
 		final Person person = new Person();
-		person.setAddress("");
+		person.setAddress("1509 Culver St");
 		person.setCity(city);
 		person.setEmail(email);
 		person.setFirstName(firstName);
@@ -53,6 +64,16 @@ class CommonServiceTest {
 		person.setPhone(phone);
 		person.setZip("");
 		return person;
+	}
+	
+	private static MedicalRecord getMedicalRecordWith(String firstName, String lastName, String birthDate) {
+		final MedicalRecord medicalRecord = new MedicalRecord();
+		medicalRecord.setFirstName(firstName);
+		medicalRecord.setLastName(lastName);
+		medicalRecord.setBirthdate(birthDate);
+		medicalRecord.setAllergies(new ArrayList<>());
+		medicalRecord.setMedications(new ArrayList<>());
+		return medicalRecord;
 	}
 	
 	@Test
@@ -79,5 +100,56 @@ class CommonServiceTest {
 		
 		//assert
 		assertThat(emailList).isEmpty();
+	}
+	
+	@Test
+	void given_NamesThatDontMatchAnyPerson_whenGettingPersonInfo_ThenReturnEmptyList() {
+		//arrange
+		when(mockManageStore.getDataStoreInstance()).thenReturn(dataStore);
+		final String firstName = "firstName";
+		final String lastName = "lastName";
+		
+		//act
+		final List<PersonInfoDto> resultList = commonService.getPersonInfoList(firstName, lastName);
+		
+		//assert
+		assertThat(resultList).isEmpty();
+	}
+	
+	@Test
+	void given_NamesThatMatchPerson_whenGettingPersonInfo_ThenReturnTheList() {
+		//arrange
+		when(mockManageStore.getDataStoreInstance()).thenReturn(dataStore);
+		final String firstName = "Dany";
+		final String lastName = "Simons";
+		
+		//act
+		final List<PersonInfoDto> resultList = commonService.getPersonInfoList(firstName, lastName);
+		
+		//assert
+		assertThat(resultList).isNotEmpty();
+	}
+	
+	@Test
+	void given_WrongStationNumber_WhenGettingPhone_ThenThrowException() {
+		//arrange
+		when(mockManageStore.getDataStoreInstance()).thenReturn(dataStore);
+		
+		//act
+		final Exception ex = assertThrows(RuntimeException.class,
+				()->commonService.getPhoneListWithStationNumber(3));
+		//assert
+		assertThat(ex.getMessage()).isEqualTo("No firestation matches that number");
+	}
+	
+	@Test
+	void given_StationNumber_WhenGettingPhone_ThenReturnList() {
+		//arrange
+		when(mockManageStore.getDataStoreInstance()).thenReturn(dataStore);
+		
+		//act
+		final List<String> phoneList = commonService.getPhoneListWithStationNumber(2);
+		//assert
+		assertThat(phoneList).isNotEmpty();
 	}
 }

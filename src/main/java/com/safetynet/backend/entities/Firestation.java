@@ -3,6 +3,7 @@
  */
 package com.safetynet.backend.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
  * @author tonys
  *
  */
-@Data @NoArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Firestation {
 
 	private String address;
