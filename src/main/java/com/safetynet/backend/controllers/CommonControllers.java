@@ -16,6 +16,7 @@ import com.safetynet.backend.dto.PersonInfoDto;
 import com.safetynet.backend.dto.PersonInfoWithFireStationDto;
 import com.safetynet.backend.dto.PersonsInfoWithChildAndAdultCount;
 import com.safetynet.backend.services.CommonService;
+import com.safetynet.backend.store.DataStore;
 
 /**
  * @author tonys
@@ -66,5 +67,10 @@ public class CommonControllers {
 	@GetMapping("communityEmail")
 	public ResponseEntity<List<String>> getAllEmailOfCity(@RequestParam(defaultValue = "") String city){
 		return ResponseEntity.ok(commonService.getAllEmailsInCity(city));
+	}
+	
+	@GetMapping("datastore")
+	public ResponseEntity<DataStore> getStoreSate(){
+		return ResponseEntity.ok(commonService.getDataStore()); 
 	}
 }

@@ -22,6 +22,7 @@ import com.safetynet.backend.entities.Firestation;
 import com.safetynet.backend.entities.MedicalRecord;
 import com.safetynet.backend.entities.Person;
 import com.safetynet.backend.mapper.PersonMapper;
+import com.safetynet.backend.store.DataStore;
 import com.safetynet.backend.store.IManageDataStore;
 
 /**
@@ -185,4 +186,7 @@ public class CommonService {
 				.collect(Collectors.toList());
 	}
 
+	public DataStore getDataStore() {
+		return this.storeManager.getDataStoreInstance();
+	}
 }
