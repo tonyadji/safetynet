@@ -35,6 +35,8 @@ public class CommonService {
 	private IManageDataStore storeManager;
 
 	private PersonMapper personMapper;
+	
+	private static final int ADULT_AGE = 18;
 
 	public CommonService(IManageDataStore storeManager) {
 		this.storeManager = storeManager;
@@ -62,7 +64,7 @@ public class CommonService {
 							&& record.getLastName().equals(p.getLastName()))
 					.collect(Collectors.toList()).get(0);
 			PersonWithMedicalRecord pwmr = personMapper.mergePersonWithRecord(p, medicalRecord);
-			if(personMapper.getAgeFromBirthDate(pwmr.getBirthdate()) > 18) {
+			if(personMapper.getAgeFromBirthDate(pwmr.getBirthdate()) > ADULT_AGE) {
 				adultNumber++;
 			}else {
 				childrenNumber++;
@@ -84,7 +86,7 @@ public class CommonService {
 					.collect(Collectors.toList()).get(0);
 			PersonWithMedicalRecord pwmr = personMapper.mergePersonWithRecord(p, medicalRecord);
 			ChildInfoDto childInfo = personMapper.toChildInfoDto(pwmr);
-			if (childInfo.getAge() <= 18) {
+			if (childInfo.getAge() <= ADULT_AGE) {
 				childInfo.setFamilyMembers(persons.stream()
 						.filter(familyMember -> familyMember.getLastName().equals(childInfo.getLastName())
 								&& !familyMember.getFirstName().equals(childInfo.getFirstName()))

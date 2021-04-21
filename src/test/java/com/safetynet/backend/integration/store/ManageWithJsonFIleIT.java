@@ -23,9 +23,17 @@ class ManageWithJsonFIleIT {
 	 * Test method for {@link com.safetynet.backend.store.ManageWithJsonFIle#initDataStore()}.
 	 */
 	@Test
-	void testInitDataStore() {
-		final boolean result = manageDateStore.initDataStore();
+	void Given_CorrectPath_WhentestInitDataStore_ThenReturnTrue() {
+		final String PATH_TO_JSON_FILE = "src/main/resources/data.json";
+		final boolean result = manageDateStore.initDataStore(PATH_TO_JSON_FILE);
 		assertTrue(result);
+	}
+	
+	@Test
+	void Given_FalsePath_WhentestInitDataStore_ThenReturnFalse() {
+		final String PATH_TO_JSON_FILE = "src/main/resources/falsedata.json";
+		final boolean result = manageDateStore.initDataStore(PATH_TO_JSON_FILE);
+		assertFalse(result);
 	}
 
 	/**

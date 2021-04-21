@@ -9,7 +9,7 @@ package com.safetynet.backend.store;
  */
 public interface IManageDataStore {
 
-	public boolean initDataStore();
+	public boolean initDataStore(String path);
 	
 	public DataStore getDataStoreInstance();
 }

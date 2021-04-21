@@ -27,13 +27,13 @@ public class ManageWithJsonFIle implements IManageDataStore {
 	private static final Logger log = LoggerFactory.getLogger(ManageWithJsonFIle.class);
 
 	@Override
-	public boolean initDataStore() {
+	public boolean initDataStore(String path) {
 		final ObjectMapper mapper = new ObjectMapper();
 		try {
-			this.store = mapper.readValue(new File(PATH_TO_JSON_FILE), DataStore.class);
+			this.store = mapper.readValue(new File(path), DataStore.class);
 			return true;
 		} catch (final IOException e) {
-			log.error("Echec parsing du json :{}  Erreur: {}" ,PATH_TO_JSON_FILE, e.getMessage());
+			log.error("Echec parsing du json :{}  Erreur: {}" ,path, e.getMessage());
 		}
 		return false;
 	}
@@ -41,7 +41,7 @@ public class ManageWithJsonFIle implements IManageDataStore {
 	@Override
 	public DataStore getDataStoreInstance() {
 		if(store == null) {
-			initDataStore();
+			initDataStore(PATH_TO_JSON_FILE);
 		}
 		return store;
 	}

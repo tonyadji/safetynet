@@ -32,7 +32,7 @@ public class CommonControllers {
 	}
 	
 	@GetMapping("firestation")
-	public ResponseEntity<PersonsInfoWithChildAndAdultCount> getChildrenByAddress(@RequestParam int stationNumber){
+	public ResponseEntity<PersonsInfoWithChildAndAdultCount> getPersonByStation(@RequestParam int stationNumber){
 		return ResponseEntity.ok(commonService.getPersonsWithChilAndAdultCount(stationNumber));
 	}
 	
@@ -69,8 +69,8 @@ public class CommonControllers {
 		return ResponseEntity.ok(commonService.getAllEmailsInCity(city));
 	}
 	
-	@GetMapping("datastore")
+	/*@GetMapping("datastore")
 	public ResponseEntity<DataStore> getStoreSate(){
 		return ResponseEntity.ok(commonService.getDataStore()); 
-	}
+	}*/
 }
