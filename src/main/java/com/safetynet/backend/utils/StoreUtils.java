@@ -17,7 +17,7 @@ import com.safetynet.backend.store.DataStore;
  */
 public class StoreUtils<T> {
 
-	public T addOrUpdateToStore(DataStore dataStore, T entity, Class<? extends Object> clazz) {
+	public <S extends T> S addOrUpdateToStore(DataStore dataStore, S entity, Class<? extends Object> clazz) {
 		if(clazz.equals(Person.class)) {
 			savePerson(dataStore,(Person)entity);
 		}
