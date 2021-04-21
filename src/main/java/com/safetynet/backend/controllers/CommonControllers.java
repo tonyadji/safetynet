@@ -16,7 +16,6 @@ import com.safetynet.backend.dto.PersonInfoDto;
 import com.safetynet.backend.dto.PersonInfoWithFireStationDto;
 import com.safetynet.backend.dto.PersonsInfoWithChildAndAdultCount;
 import com.safetynet.backend.services.CommonService;
-import com.safetynet.backend.store.DataStore;
 
 /**
  * @author tonys

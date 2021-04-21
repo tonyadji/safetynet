@@ -80,19 +80,23 @@ public class CommonService {
 		final List<ChildInfoDto> listOfChildren = new ArrayList<>();
 		final List<MedicalRecord> medicalRecords = storeManager.getDataStoreInstance().getMedicalrecords();
 		for (Person p : persons) {
-			MedicalRecord medicalRecord = medicalRecords.stream()
+			final List<MedicalRecord> records = medicalRecords.stream()
 					.filter(record -> record.getFirstName().equals(p.getFirstName())
 							&& record.getLastName().equals(p.getLastName()))
-					.collect(Collectors.toList()).get(0);
-			PersonWithMedicalRecord pwmr = personMapper.mergePersonWithRecord(p, medicalRecord);
-			ChildInfoDto childInfo = personMapper.toChildInfoDto(pwmr);
-			if (childInfo.getAge() <= ADULT_AGE) {
-				childInfo.setFamilyMembers(persons.stream()
-						.filter(familyMember -> familyMember.getLastName().equals(childInfo.getLastName())
-								&& !familyMember.getFirstName().equals(childInfo.getFirstName()))
-						.collect(Collectors.toList()));
-				listOfChildren.add(childInfo);
+					.collect(Collectors.toList());
+			if(!records.isEmpty()) {
+				MedicalRecord medicalRecord = records.get(0);
+				PersonWithMedicalRecord pwmr = personMapper.mergePersonWithRecord(p, medicalRecord);
+				ChildInfoDto childInfo = personMapper.toChildInfoDto(pwmr);
+				if (childInfo.getAge() <= ADULT_AGE) {
+					childInfo.setFamilyMembers(persons.stream()
+							.filter(familyMember -> familyMember.getLastName().equals(childInfo.getLastName())
+									&& !familyMember.getFirstName().equals(childInfo.getFirstName()))
+							.collect(Collectors.toList()));
+					listOfChildren.add(childInfo);
+				}
 			}
+			
 		}
 		return listOfChildren;
 	}
@@ -113,6 +117,12 @@ public class CommonService {
 	}
 
 	public PersonInfoWithFireStationDto getPersonInfoByAdress(String adress) {
+		final List<Firestation> fireStations = storeManager.getDataStoreInstance().getFirestations().stream()
+				.filter(station -> station.getAddress().equals(adress)).collect(Collectors.toList());
+		if (fireStations.isEmpty()) {
+			throw new RuntimeException("No firestation matches that adress");
+		}
+		int station = fireStations.get(0).getStation();
 		final List<Person> persons = storeManager.getDataStoreInstance().getPersons().stream()
 				.filter(p -> p.getAddress().equals(adress)).collect(Collectors.toList());
 		final List<MedicalRecord> medicalRecords = storeManager.getDataStoreInstance().getMedicalrecords();
@@ -125,12 +135,6 @@ public class CommonService {
 			PersonWithMedicalRecord pwmr = personMapper.mergePersonWithRecord(p, medicalRecord);
 			personListToReturn.add(personMapper.toPersonInfoDto(pwmr));
 		}
-		final List<Firestation> fireStations = storeManager.getDataStoreInstance().getFirestations().stream()
-				.filter(station -> station.getAddress().equals(adress)).collect(Collectors.toList());
-		if (fireStations.isEmpty()) {
-			throw new RuntimeException("No firestation matches that adress");
-		}
-		int station = fireStations.get(0).getStation();
 		return new PersonInfoWithFireStationDto(station, personListToReturn);
 	}
 	
