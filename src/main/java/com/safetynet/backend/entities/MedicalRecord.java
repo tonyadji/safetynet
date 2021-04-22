@@ -7,14 +7,16 @@ import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author tonys
  *
  */
-@Data @NoArgsConstructor
+@Getter @Setter @EqualsAndHashCode @NoArgsConstructor
 public class MedicalRecord {
 
 	@NotEmpty

@@ -6,14 +6,15 @@ package com.safetynet.backend.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author tonys
  *
  */
-@Data @NoArgsConstructor
+@Getter 
 public class FloodStationsDto {
 	
 	public FloodStationsDto(int stationNumber) {

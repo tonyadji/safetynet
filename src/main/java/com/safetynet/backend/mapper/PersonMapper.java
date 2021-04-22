@@ -28,13 +28,11 @@ public class PersonMapper {
 		personWithMedicalRecord.setAddress(p.getAddress());
 		personWithMedicalRecord.setAllergies(mr.getAllergies());
 		personWithMedicalRecord.setBirthdate(mr.getBirthdate());
-		personWithMedicalRecord.setCity(p.getCity());
 		personWithMedicalRecord.setEmail(p.getEmail());
 		personWithMedicalRecord.setFirstName(p.getFirstName());
 		personWithMedicalRecord.setLastName(p.getLastName());
 		personWithMedicalRecord.setMedications(mr.getMedications());
 		personWithMedicalRecord.setPhone(p.getPhone());
-		personWithMedicalRecord.setZip(p.getZip());
 		return personWithMedicalRecord;
 	}
 	

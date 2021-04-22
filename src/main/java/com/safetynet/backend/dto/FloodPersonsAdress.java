@@ -6,14 +6,13 @@ package com.safetynet.backend.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 /**
  * @author tonys
  *
  */
-@Data @NoArgsConstructor
+@Getter  
 public class FloodPersonsAdress {
 	
 	public FloodPersonsAdress(String address) {
