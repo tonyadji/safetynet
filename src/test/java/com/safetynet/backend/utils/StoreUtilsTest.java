@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.safetynet.backend;
+package com.safetynet.backend.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +15,6 @@ import com.safetynet.backend.entities.Firestation;
 import com.safetynet.backend.entities.MedicalRecord;
 import com.safetynet.backend.entities.Person;
 import com.safetynet.backend.store.DataStore;
-import com.safetynet.backend.utils.StoreUtils;
 
 /**
  * @author tonys
