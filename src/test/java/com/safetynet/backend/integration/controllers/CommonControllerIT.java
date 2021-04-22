@@ -90,8 +90,8 @@ class CommonControllerIT {
 	@Test
 	void testGetPersonByStation() throws Exception {
 		// arrange
-		final PersonsInfoWithChildAndAdultCount personsInfoWithChildAndAdultCount = new PersonsInfoWithChildAndAdultCount();
-		personsInfoWithChildAndAdultCount.setChildren(0);
+		final PersonsInfoWithChildAndAdultCount personsInfoWithChildAndAdultCount = new PersonsInfoWithChildAndAdultCount(
+				new ArrayList<>(),0,0);
 		int stationNumber = 6;
 		when(commonService.getPersonsWithChilAndAdultCount(stationNumber))
 				.thenReturn(personsInfoWithChildAndAdultCount);
@@ -120,8 +120,7 @@ class CommonControllerIT {
 	void testGetPersonsByStationAdress() throws Exception {
 		// arrange
 		final String address = "address";
-		final PersonInfoWithFireStationDto personInfo = new PersonInfoWithFireStationDto();
-		personInfo.setFireStationNumber(2);
+		final PersonInfoWithFireStationDto personInfo = new PersonInfoWithFireStationDto(2,new ArrayList<PersonInfoDto>());
 		when(commonService.getPersonInfoByAdress(address)).thenReturn(personInfo);
 
 		// act
@@ -132,8 +131,7 @@ class CommonControllerIT {
 	@Test
 	void testGetFloodStation() throws Exception {
 		// arrange
-		final FloodStationsDto floodDto = new FloodStationsDto();
-		floodDto.setStationNumber(1);
+		final FloodStationsDto floodDto = new FloodStationsDto(1);
 		final List<FloodStationsDto> list = new ArrayList<>();
 		list.add(floodDto);
 		List<String> stations = new ArrayList<>();

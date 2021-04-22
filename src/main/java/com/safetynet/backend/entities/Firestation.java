@@ -6,14 +6,15 @@ package com.safetynet.backend.entities;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
  * @author tonys
  *
  */
-@Data @NoArgsConstructor @AllArgsConstructor
+@Getter @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
 public class Firestation {
 
 	@NotEmpty

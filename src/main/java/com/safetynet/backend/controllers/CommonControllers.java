@@ -67,9 +67,4 @@ public class CommonControllers {
 	public ResponseEntity<List<String>> getAllEmailOfCity(@RequestParam(defaultValue = "") String city){
 		return ResponseEntity.ok(commonService.getAllEmailsInCity(city));
 	}
-	
-	/*@GetMapping("datastore")
-	public ResponseEntity<DataStore> getStoreSate(){
-		return ResponseEntity.ok(commonService.getDataStore()); 
-	}*/
 }

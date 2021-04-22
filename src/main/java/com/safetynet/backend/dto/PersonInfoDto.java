@@ -5,14 +5,15 @@ package com.safetynet.backend.dto;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author tonys
  *
  */
-@Data @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class PersonInfoDto {
 
 	private String firstName;

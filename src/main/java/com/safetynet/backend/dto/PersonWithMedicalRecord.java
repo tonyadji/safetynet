@@ -5,21 +5,20 @@ package com.safetynet.backend.dto;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author tonys
  *
  */
-@Data @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class PersonWithMedicalRecord {
 
 	private String firstName;
 	private String lastName;
 	private String address;
-	private String city;
-	private String zip;
 	private String phone;
 	private String email;
 	private String birthdate;

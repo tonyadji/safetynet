@@ -7,14 +7,15 @@ import java.util.List;
 
 import com.safetynet.backend.entities.Person;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author tonys
  *
  */
-@Data @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class ChildInfoDto {
 
 	private String firstName;
