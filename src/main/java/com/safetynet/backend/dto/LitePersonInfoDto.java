@@ -3,6 +3,7 @@
  */
 package com.safetynet.backend.dto;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import lombok.Setter;
  * @author tonys
  *
  */
-@Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class LitePersonInfoDto {
 
 	private String firstName;
