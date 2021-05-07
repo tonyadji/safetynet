@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.safetynet.backend.dao.facade.AbstractDAO;
 import com.safetynet.backend.entities.Firestation;
 import com.safetynet.backend.entities.MedicalRecord;
 import com.safetynet.backend.entities.Person;

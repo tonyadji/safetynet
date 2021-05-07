@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.safetynet.backend.dao;
+package com.safetynet.backend.dao.facade;
 
 import com.safetynet.backend.store.IManageDataStore;
 import com.safetynet.backend.utils.StoreUtils;

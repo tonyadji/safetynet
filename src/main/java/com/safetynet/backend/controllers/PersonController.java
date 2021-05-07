@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynet.backend.dao.PersonDAO;
+import com.safetynet.backend.dao.facade.FacadePersonDAO;
 import com.safetynet.backend.entities.Person;
 
 /**
@@ -27,9 +27,9 @@ public class PersonController {
 
 	private final Logger log = LogManager.getLogger(getClass());
 	
-	private final PersonDAO personDao;
+	private final FacadePersonDAO personDao;
 	
-	public PersonController(PersonDAO dao) {
+	public PersonController(FacadePersonDAO dao) {
 		this.personDao = dao;
 	}
 	

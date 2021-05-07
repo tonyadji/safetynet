@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynet.backend.dao.MedicalRecordDAO;
+import com.safetynet.backend.dao.facade.FacadeMEdicalRecordDAO;
 import com.safetynet.backend.entities.MedicalRecord;
 
 /**
@@ -23,9 +23,9 @@ import com.safetynet.backend.entities.MedicalRecord;
 @RequestMapping("/medicalRecord")
 public class MedicalRecordController {
 
-	private final MedicalRecordDAO medicalRecordDao;
+	private final FacadeMEdicalRecordDAO medicalRecordDao;
 	
-	public MedicalRecordController(MedicalRecordDAO dao) {
+	public MedicalRecordController(FacadeMEdicalRecordDAO dao) {
 		this.medicalRecordDao = dao;
 	}
 	

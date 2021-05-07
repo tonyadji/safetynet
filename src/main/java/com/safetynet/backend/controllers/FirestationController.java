@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynet.backend.dao.FirestationDAO;
+import com.safetynet.backend.dao.facade.FacadeFireStationDAO;
 import com.safetynet.backend.entities.Firestation;
 
 /**
@@ -23,9 +23,9 @@ import com.safetynet.backend.entities.Firestation;
 @RequestMapping("/firestation")
 public class FirestationController {
 
-	private final FirestationDAO firestationDao;
+	private final FacadeFireStationDAO firestationDao;
 	
-	public FirestationController(FirestationDAO dao) {
+	public FirestationController(FacadeFireStationDAO dao) {
 		this.firestationDao = dao;
 	}
 	
