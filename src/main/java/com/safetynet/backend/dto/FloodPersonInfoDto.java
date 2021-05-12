@@ -8,12 +8,13 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author tonys
  *
  */
-@Setter @Getter @NoArgsConstructor
+@Setter @Getter @NoArgsConstructor @ToString
 public class FloodPersonInfoDto {
 
 	private String firstName;

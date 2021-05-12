@@ -142,9 +142,9 @@ class CommonServiceTest {
 		when(mockManageStore.getDataStoreInstance()).thenReturn(dataStore);
 
 		// act
-		final Exception ex = assertThrows(RuntimeException.class, () -> commonService.getPhoneListWithStationNumber(3));
+		final List<String> result = commonService.getPhoneListWithStationNumber(3);
 		// assert
-		assertThat(ex.getMessage()).isEqualTo("No firestation matches that number");
+		assertThat(result).isEmpty();
 	}
 
 	@Test
@@ -185,31 +185,30 @@ class CommonServiceTest {
 	}
 
 	@Test
-	void given_WrongStationNumber_WhenGettingPersonsInfoAndCounting_ThenReturnTheObject() {
+	void given_WrongStationNumber_WhenGettingPersonsInfoAndCounting_ThenReturnEmptyList() {
 		// arrange
 		when(mockManageStore.getDataStoreInstance()).thenReturn(dataStore);
 
 		// act
-		final Exception ex = assertThrows(RuntimeException.class,
-				() -> commonService.getPersonsWithChilAndAdultCount(9));
+		final PersonsInfoWithChildAndAdultCount result = commonService.getPersonsWithChilAndAdultCount(9);
 
 		// assert
-		assertThat(ex.getMessage()).isEqualTo("No firestation matches that number");
-
+		assertThat(result.getPersons()).isEmpty();
+		assertThat(result.getAdults()).isEqualTo(-1);
 		// assert
 	}
 
 	@Test
-	void given_WrongStationAddress_WhenGettingPersonsInfoByAddress_ThenThrowException() {
+	void given_WrongStationAddress_WhenGettingPersonsInfoByAddress_ThenReturnEmptyListAnd0asStationnumber() {
 		// arrange
 		when(mockManageStore.getDataStoreInstance()).thenReturn(dataStore);
 
 		// act
-		final Exception ex = assertThrows(RuntimeException.class,
-				() -> commonService.getPersonInfoByAdress("wrong address"));
+		final PersonInfoWithFireStationDto result = commonService.getPersonInfoByAdress("wrong address");
 
 		// assert
-		assertThat(ex.getMessage()).isEqualTo("No firestation matches that adress");
+		assertThat(result.getPersons()).isEmpty();
+		assertThat(result.getFireStationNumber()).isEqualTo(-1);
 
 	}
 

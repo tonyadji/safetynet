@@ -10,12 +10,13 @@ import com.safetynet.backend.entities.Person;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author tonys
  *
  */
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class ChildInfoDto {
 
 	private String firstName;

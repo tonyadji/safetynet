@@ -25,7 +25,7 @@ import com.safetynet.backend.entities.Person;
 @RequestMapping("/person")
 public class PersonController {
 
-	private final Logger log = LogManager.getLogger(getClass());
+	private final Logger LOG = LogManager.getLogger(getClass());
 	
 	private final FacadePersonDAO personDao;
 	
@@ -35,22 +35,25 @@ public class PersonController {
 	
 	@PostMapping
 	public ResponseEntity<Person> addPerson(@RequestBody Person p) {
+		LOG.debug("[ POST /person ]");
 		personDao.save(p);
-		log.info("Person saved");
+		LOG.info("Person saved {}",p);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	@PutMapping
 	public ResponseEntity<Person> updatePerson(@RequestBody Person p) {
+		LOG.debug("[ PUT /person ]");
 		personDao.save(p);
-		log.info("Person updated");
+		LOG.info("Person updated {}",p);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping
 	public ResponseEntity<Person> deletePerson(@RequestBody Person p) {
+		LOG.debug("[ DELETE /person ]");
 		personDao.delete(p);
-		log.info("Person deleted");
+		LOG.info("Person deleted {}",p);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

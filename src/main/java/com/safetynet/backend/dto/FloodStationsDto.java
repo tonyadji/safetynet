@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @author tonys
  *
  */
-@Getter 
+@Getter @ToString
 public class FloodStationsDto {
 	
 	public FloodStationsDto(int stationNumber) {

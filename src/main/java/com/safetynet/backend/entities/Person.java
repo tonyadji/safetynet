@@ -9,12 +9,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author tonys
  *
  */
-@Getter @Setter @EqualsAndHashCode @NoArgsConstructor
+@Getter @Setter @EqualsAndHashCode @NoArgsConstructor @ToString
 public class Person {
 
 	@NotEmpty

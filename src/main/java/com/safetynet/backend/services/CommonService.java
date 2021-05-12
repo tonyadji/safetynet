@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.backend.dto.ChildInfoDto;
@@ -37,6 +39,8 @@ public class CommonService {
 	private PersonMapper personMapper;
 	
 	private static final int ADULT_AGE = 18;
+	
+	private static final Logger LOG = LogManager.getLogger();
 
 	public CommonService(IManageDataStore storeManager) {
 		this.storeManager = storeManager;
@@ -47,7 +51,8 @@ public class CommonService {
 		final List<Firestation> fireStations = storeManager.getDataStoreInstance().getFirestations().stream()
 				.filter(station -> station.getStation() == stationNumber).collect(Collectors.toList());
 		if (fireStations.isEmpty()) {
-			throw new RuntimeException("No firestation matches that number");
+			LOG.error("No firestation matches that number {}",stationNumber);
+			return new PersonsInfoWithChildAndAdultCount(new ArrayList<>(),-1,-1);
 		}
 		int childrenNumber = 0;
 		int adultNumber = 0;
@@ -105,7 +110,8 @@ public class CommonService {
 		final List<Firestation> fireStations = storeManager.getDataStoreInstance().getFirestations().stream()
 				.filter(station -> station.getStation() == fireStationNumber).collect(Collectors.toList());
 		if (fireStations.isEmpty()) {
-			throw new RuntimeException("No firestation matches that number");
+			LOG.error("No firestation matches that number {}",fireStationNumber);
+			return new ArrayList<>();
 		}
 		final List<String> phoneList = new ArrayList<>();
 		for (Firestation station : fireStations) {
@@ -120,7 +126,8 @@ public class CommonService {
 		final List<Firestation> fireStations = storeManager.getDataStoreInstance().getFirestations().stream()
 				.filter(station -> station.getAddress().equals(adress)).collect(Collectors.toList());
 		if (fireStations.isEmpty()) {
-			throw new RuntimeException("No firestation matches that adress");
+			LOG.error("No firestation matches that adress {}",adress);
+			return new PersonInfoWithFireStationDto(-1,new ArrayList<>());
 		}
 		int station = fireStations.get(0).getStation();
 		final List<Person> persons = storeManager.getDataStoreInstance().getPersons().stream()
